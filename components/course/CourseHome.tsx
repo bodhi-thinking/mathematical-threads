@@ -1,0 +1,2 @@
+import Link from 'next/link';import{lessons}from '../../course';
+export function CourseHome(){return <main className="shell"><div className="eyebrow">Mathematical Thinking</div><h1>Learning to think mathematically.</h1><p className="muted">Stories → playgrounds → puzzles → the next question.</p><div className="grid lesson-grid">{lessons.map(l=><article className="card" key={l.id}><div className="eyebrow">Series 1</div><h2>{l.title}</h2><p className="muted">{l.subtitle}</p><Link className="button" href={`/lesson/${l.id}`}>Enter lesson</Link></article>)}</div></main>}

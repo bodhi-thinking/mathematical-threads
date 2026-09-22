@@ -1,0 +1,1 @@
+export const story={title:'When Did Humans Begin Counting?',introduction:'This is temporary dummy content. The real Series 1 story will be added after the course shell is working.',sections:['A story will introduce the mathematical idea.','A playground will let you experiment with it.','Ten puzzles will then ask you to notice, represent, reason and generalise.']};

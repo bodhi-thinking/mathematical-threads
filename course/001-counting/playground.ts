@@ -1,0 +1,1 @@
+export const playground={id:'counting-playground',title:'Montessori Playground — coming soon',description:'This is a placeholder for the interactive material environment.',materials:['placeholder material','placeholder workspace']};

@@ -1,0 +1,1 @@
+export function PlaygroundView({playground}:{playground:{title:string;description:string}}){return <section className="card"><div className="eyebrow">Playground</div><h2>{playground.title}</h2><p>{playground.description}</p><div className="playground"><div className="fake-material">Interactive material</div></div></section>}

@@ -1,0 +1,1 @@
+export function StoryView({story}:{story:{title:string;introduction:string;sections:string[]}}){return <section><div className="eyebrow">Story</div><h1>{story.title}</h1><p>{story.introduction}</p>{story.sections.map((s,i)=><p key={i}>{s}</p>)}</section>}
