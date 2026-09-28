@@ -1,1 +1,5 @@
-export const playground={id:'playground-id',title:'Playground title',description:'Describe the interactive environment.',materials:[] as string[]};
+export const playground = {
+  id: "example-playground",
+  title: "Example Playground",
+  description: "A reusable interactive mathematical environment.",
+};
