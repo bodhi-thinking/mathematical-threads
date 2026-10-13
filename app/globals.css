@@ -9,6 +9,13 @@
   --line: #ded8ca;
   --accent: #3e6f68;
   --card: #fffdf8;
+
+  /* Landing / investigation */
+  --envelope-paper: #c39a72;
+  --envelope-paper-light: #d4b08a;
+  --envelope-ink: #765033;
+  --envelope-line: #916744;
+  --envelope-shadow: rgba(74, 49, 29, 0.14);
 }
 
 *,
@@ -265,6 +272,275 @@ p {
 .lesson-button:hover {
   transform: translateY(-1px);
 }
+
+/* =========================================================
+   LANDING PAGE: MYSTERY / INVESTIGATION
+   ========================================================= */
+
+.mystery-section {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.7fr) minmax(0, 1.5fr);
+  gap: clamp(2rem, 7vw, 6rem);
+  padding: 4.5rem 0 4rem;
+}
+
+.mystery-label,
+.section-label {
+  color: var(--accent);
+  font: 600 0.75rem/1.4 system-ui, sans-serif;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.mystery-content {
+  min-width: 0;
+  max-width: 45rem;
+}
+
+.mystery-content h2 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.mystery-content p {
+  max-width: 40rem;
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.mystery-highlight {
+  margin: 1.75rem 0 !important;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--ink) !important;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+/* =========================================================
+   LANDING PAGE: OLD ENVELOPE
+   ========================================================= */
+
+.mystery-envelope {
+  position: relative;
+  width: min(100%, 42rem);
+  margin: 2.25rem 0 0;
+  padding: 0.875rem;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      transparent 35%,
+      rgba(91, 55, 29, 0.06) 100%
+    ),
+    var(--envelope-paper);
+  border: 1px solid var(--envelope-line);
+  border-radius: 0.2rem;
+  box-shadow:
+    0 8px 20px var(--envelope-shadow),
+    inset 0 0 0 1px rgba(255, 244, 224, 0.25);
+  transform: rotate(-0.4deg);
+}
+
+.mystery-envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0.4rem;
+  border: 1px solid rgba(104, 67, 39, 0.35);
+  border-radius: 0.1rem;
+  pointer-events: none;
+}
+
+.mystery-envelope::after {
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  left: 50%;
+  width: 72%;
+  height: 1px;
+  background: rgba(104, 67, 39, 0.3);
+  transform: translateX(-50%) rotate(-0.5deg);
+  pointer-events: none;
+}
+
+.envelope-inner {
+  position: relative;
+  min-height: 13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border: 1px solid rgba(104, 67, 39, 0.3);
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 244, 224, 0.16),
+      rgba(103, 66, 38, 0.04)
+    );
+}
+
+.envelope-inner::before,
+.envelope-inner::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.envelope-inner::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  border-bottom: 1px solid rgba(104, 67, 39, 0.28);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
+.envelope-inner::after {
+  inset: 0.5rem;
+  border: 1px dashed rgba(104, 67, 39, 0.2);
+}
+
+.envelope-label {
+  position: relative;
+  z-index: 1;
+  max-width: 30rem;
+  color: var(--envelope-ink);
+  font: 600 clamp(0.95rem, 2vw, 1.15rem)/1.5 system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.envelope-label span {
+  display: block;
+  margin-top: 0.625rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+/* =========================================================
+   LANDING PAGE: INVESTIGATION STEPS
+   ========================================================= */
+
+.investigation-section {
+  padding: 1rem 0 4.5rem;
+}
+
+.investigation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 1.75rem;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.investigation-step {
+  min-height: 13rem;
+  padding: 1.5rem;
+  background: var(--card);
+}
+
+.investigation-number {
+  display: block;
+  margin-bottom: 3rem;
+  color: var(--accent);
+  font: 600 0.75rem/1 system-ui, sans-serif;
+  letter-spacing: 0.1em;
+}
+
+.investigation-step h3 {
+  margin: 0 0 0.625rem;
+  font: 500 1.35rem/1.2 Georgia, "Times New Roman", serif;
+}
+
+.investigation-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   LANDING PAGE: WORKSHEETS / CLUES
+   ========================================================= */
+
+.worksheet-note {
+  max-width: 45rem;
+  margin: 1.5rem 0 0;
+  padding: 1.125rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: rgba(255, 253, 248, 0.55);
+}
+
+.worksheet-note p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.worksheets-highlight {
+  display: inline-block;
+  margin: 0 0.15em;
+  padding: 0.08em 0.35em;
+  border-radius: 0.2rem;
+  background: #e5dcc8;
+  color: var(--ink);
+  font: 700 0.95em/1.25 system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.clues-highlight {
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+
+/* =========================================================
+   LANDING PAGE: SERIES
+   ========================================================= */
+
+.series-section {
+  padding-top: 0.5rem;
+}
+
+.series-section .lesson-grid {
+  margin-top: 1.5rem;
+}
+
+/* =========================================================
+   LANDING PAGE: CLOSING
+   ========================================================= */
+
+.landing-closing {
+  max-width: 42rem;
+  margin: 4.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.landing-closing p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.landing-closing-main {
+  margin-bottom: 0.5rem !important;
+  color: var(--ink) !important;
+  font-size: 1.35rem !important;
+}
+
+
 
 /* =========================================================
    LESSON TOPBAR / COURSE HOME
@@ -927,6 +1203,10 @@ p {
   align-items: start;
 }
 
+.puzzle-content {
+  min-width: 0;
+}
+
 .puzzle-content > h2 {
   margin: 0 0 1rem;
   color: var(--ink);
@@ -1006,7 +1286,7 @@ p {
 
 .puzzle-submit-row input:focus-visible {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(104, 93, 67, 0.12);
+  box-shadow: 0 0 0 3px rgba(62, 111, 104, 0.12);
 }
 
 .puzzle-submit-row input:disabled {
@@ -1139,6 +1419,23 @@ p {
   .place-column {
     min-width: 8.625rem;
   }
+
+  .mystery-section {
+    grid-template-columns: minmax(10rem, 0.55fr) minmax(0, 1.45fr);
+    gap: 3rem;
+  }
+
+  .investigation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .investigation-step {
+    min-height: 12rem;
+  }
+
+  .investigation-number {
+    margin-bottom: 2rem;
+  }
 }
 
 /* =========================================================
@@ -1158,6 +1455,72 @@ p {
   h2 {
     font-size: 1.875rem;
   }
+
+  /* -------------------------------------------------------
+     Landing
+     ------------------------------------------------------- */
+
+  .landing-page {
+    padding: 2.375rem 1.125rem 3.75rem;
+  }
+
+  .landing-title {
+    font-size: clamp(2.625rem, 9vw, 3.5rem);
+  }
+
+  .landing-divider {
+    margin: 2.5rem 0 1.375rem;
+  }
+
+  .lesson-card {
+    min-height: 21.25rem;
+  }
+
+  .lesson-card-content {
+    padding: 2.625rem 0 1.875rem;
+  }
+
+  .mystery-section {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    padding: 3.5rem 0;
+  }
+
+  .mystery-content {
+    max-width: 42rem;
+  }
+
+  .mystery-content h2 {
+    max-width: 38rem;
+  }
+
+  .mystery-envelope {
+    margin-top: 1.5rem;
+  }
+
+  .investigation-section {
+    padding-bottom: 3.75rem;
+  }
+
+  .investigation-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .investigation-step {
+    min-height: 12rem;
+  }
+
+  .investigation-number {
+    margin-bottom: 2rem;
+  }
+
+  .landing-closing {
+    margin-top: 4rem;
+  }
+
+  /* -------------------------------------------------------
+     Story
+     ------------------------------------------------------- */
 
   .story-experience {
     min-height: calc(100dvh - 6rem);
@@ -1200,26 +1563,6 @@ p {
 
   .story-beat-question {
     font-size: clamp(1.625rem, 4vw, 2.125rem);
-  }
-
-  .landing-page {
-    padding: 2.375rem 1.125rem 3.75rem;
-  }
-
-  .landing-title {
-    font-size: clamp(2.625rem, 9vw, 3.5rem);
-  }
-
-  .landing-divider {
-    margin: 2.5rem 0 1.375rem;
-  }
-
-  .lesson-card {
-    min-height: 21.25rem;
-  }
-
-  .lesson-card-content {
-    padding: 2.625rem 0 1.875rem;
   }
 
   .story-title-group h1 {
@@ -1290,6 +1633,232 @@ p {
   .playground-note {
     flex-wrap: wrap;
   }
+
+  /* -------------------------------------------------------
+     Landing
+     ------------------------------------------------------- */
+
+  .landing-page {
+    padding-top: 2rem;
+  }
+
+  .landing-title {
+    max-width: 30rem;
+  }
+
+  .mystery-section {
+    padding: 3rem 0;
+  }
+
+  .mystery-content h2 {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .mystery-highlight {
+    font-size: 1.2rem;
+  }
+
+  .mystery-envelope {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 0.65rem;
+  }
+
+  .envelope-inner {
+    min-height: 11rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .envelope-label {
+    font-size: 0.82rem;
+  }
+
+  .envelope-label span {
+    font-size: 1.45rem;
+  }
+
+  .investigation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .investigation-step {
+    min-height: auto;
+    padding: 1.375rem;
+  }
+
+  .investigation-number {
+    margin-bottom: 1.5rem;
+  }
+
+  .worksheet-note {
+    padding: 1rem;
+  }
+
+  .landing-closing {
+    margin-top: 3.5rem;
+  }
+
+  /* -------------------------------------------------------
+     Story
+     ------------------------------------------------------- */
+
+  .story-experience-header {
+    padding-bottom: 0.875rem;
+  }
+
+  .story-title-row {
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .story-title-row h1 {
+    max-width: 20.625rem;
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+    line-height: 1.05;
+  }
+
+  .story-counter {
+    font-size: 0.625rem;
+  }
+
+  .story-stage {
+    min-height: max(22.5rem, calc(100dvh - 14.375rem));
+    padding: 0.25rem 0 0.5rem;
+  }
+
+  .story-beat {
+    width: 100%;
+    padding: 0.5rem 0.125rem;
+  }
+
+  .story-beat-text {
+    margin-bottom: 0.8125rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .story-beat-highlight {
+    margin: 0.8125rem 0 1.125rem;
+    padding-left: 0.9375rem;
+    font-size: 1.375rem;
+    line-height: 1.28;
+  }
+
+  .story-beat-question {
+    margin: 1rem 0;
+    font-size: 1.625rem;
+    line-height: 1.25;
+  }
+
+  .story-beat-image {
+    margin-bottom: 1.25rem;
+  }
+
+  .story-beat-image img {
+    width: auto;
+    max-width: 94%;
+    height: min(31svh, 17.5rem);
+  }
+
+  .story-image-fallback {
+    width: 88%;
+    min-height: 9.375rem;
+  }
+
+  .story-beat-list {
+    margin: 0.625rem 0;
+  }
+
+  .story-beat-list li {
+    gap: 0.625rem;
+    margin-bottom: 0.6875rem;
+    font-size: 1.0625rem;
+    line-height: 1.45;
+  }
+
+  .story-dots-navigation {
+    min-height: 2.375rem;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+    justify-content: flex-start;
+  }
+
+  .story-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .story-dot-active {
+    width: 1.125rem;
+  }
+
+  .story-swipe-hint {
+    min-height: 1.25rem;
+    font-size: 0.625rem;
+  }
+
+  /* -------------------------------------------------------
+     Puzzles
+     ------------------------------------------------------- */
+
+  .puzzle {
+    padding: 1.375rem 1.25rem;
+  }
+
+  .puzzle-number {
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .puzzle-content > h2 {
+    font-size: 1.2rem;
+  }
+
+  .puzzle-prompt,
+  .puzzle-intro p {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+
+  .puzzle-instructions {
+    margin-top: 1.125rem;
+    padding-left: 1.375rem;
+    font-size: 0.9375rem;
+  }
+
+  .puzzle-submit-row {
+    flex-direction: column;
+  }
+
+  .puzzle-submit-button {
+    width: 100%;
+  }
+
+  .puzzle-progress {
+    margin-top: 1.25rem;
+  }
+
+  .puzzle-hint,
+  .puzzle-reveal {
+    padding: 0.875rem 0.9375rem;
+  }
+
+  .story-title-group h1 {
+    font-size: 1.875rem;
+  }
+
+  .story-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .story-navigation-row {
+    gap: 0.5625rem;
+  }
+
+  .story-nav-arrow {
+    width: 2.375rem;
+    height: 2rem;
+  }
 }
 
 /* =========================================================
@@ -1319,6 +1888,160 @@ p {
   .card {
     padding: 1.25rem;
   }
+
+  /* -------------------------------------------------------
+     Landing
+     ------------------------------------------------------- */
+
+  .landing-page {
+    padding-inline: 0.875rem;
+    padding-bottom: 3rem;
+  }
+
+  .landing-kicker {
+    margin-bottom: 0.75rem;
+    font-size: 0.72rem;
+  }
+
+  .landing-title {
+    font-size: clamp(2.375rem, 11vw, 3.125rem);
+    line-height: 0.99;
+  }
+
+  .landing-subtitle {
+    margin-top: 1.25rem;
+    font-size: 1.0625rem;
+  }
+
+  .landing-divider {
+    margin: 2rem 0 1.25rem;
+  }
+
+  .lesson-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-card {
+    min-height: 20rem;
+    padding: 1.375rem;
+  }
+
+  .lesson-card-content {
+    padding: 2.25rem 0 1.75rem;
+  }
+
+  .lesson-card-content h2 {
+    font-size: 1.875rem;
+  }
+
+  .lesson-description {
+    font-size: 1.0625rem;
+  }
+
+  .mystery-section {
+    padding: 2.5rem 0;
+  }
+
+  .mystery-label,
+  .section-label {
+    font-size: 0.7rem;
+  }
+
+  .mystery-content h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  .mystery-content p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .mystery-highlight {
+    margin: 1.5rem 0 !important;
+    padding-left: 0.875rem;
+    font-size: 1.15rem;
+  }
+
+  .mystery-envelope {
+    padding: 0.5rem;
+  }
+
+  .mystery-envelope::before {
+    inset: 0.3rem;
+  }
+
+  .envelope-inner {
+    min-height: 10rem;
+    padding: 1.75rem 1.25rem;
+  }
+
+  .envelope-inner::after {
+    inset: 0.35rem;
+  }
+
+  .envelope-label {
+    max-width: 16rem;
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .envelope-label span {
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
+  }
+
+  .investigation-section {
+    padding-bottom: 3rem;
+  }
+
+  .investigation-grid {
+    margin-top: 1.25rem;
+  }
+
+  .investigation-step {
+    padding: 1.25rem;
+  }
+
+  .investigation-number {
+    margin-bottom: 1.25rem;
+    font-size: 0.7rem;
+  }
+
+  .investigation-step h3 {
+    font-size: 1.25rem;
+  }
+
+  .investigation-step p {
+    font-size: 0.95rem;
+  }
+
+  .worksheet-note {
+    margin-top: 1.25rem;
+    padding: 0.875rem 1rem;
+  }
+
+  .worksheet-note p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .landing-closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+  }
+
+  .landing-closing-main {
+    font-size: 1.2rem !important;
+  }
+
+  .landing-closing p {
+    font-size: 0.95rem;
+  }
+
+  /* -------------------------------------------------------
+     Story
+     ------------------------------------------------------- */
 
   .story-experience {
     min-height: calc(100dvh - 8.125rem);
@@ -1419,6 +2142,10 @@ p {
     font-size: 0.625rem;
   }
 
+  /* -------------------------------------------------------
+     Puzzles
+     ------------------------------------------------------- */
+
   .puzzle {
     padding: 1.375rem 1.25rem;
   }
@@ -1459,35 +2186,6 @@ p {
   .puzzle-hint,
   .puzzle-reveal {
     padding: 0.875rem 0.9375rem;
-  }
-
-  .landing-page {
-    padding-inline: 0.875rem;
-  }
-
-  .landing-title {
-    font-size: clamp(2.375rem, 11vw, 3.125rem);
-  }
-
-  .landing-subtitle {
-    font-size: 1.0625rem;
-  }
-
-  .lesson-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .lesson-card {
-    min-height: 20rem;
-    padding: 1.375rem;
-  }
-
-  .lesson-card-content h2 {
-    font-size: 1.875rem;
-  }
-
-  .lesson-description {
-    font-size: 1.0625rem;
   }
 
   .story-title-group h1 {
@@ -1561,11 +2259,518 @@ p {
   .course-home-link,
   .story-nav-arrow,
   .clear-button,
-  .place-action {
+  .place-action,
+  .mystery-envelope {
     transition: none;
   }
 
   .place-unit {
     animation: none;
+  }
+}
+
+/* =========================================================
+   LANDING PAGE v2 — HERO, ENVELOPE, LETTER, JOURNEY
+   Append this AFTER the existing landing rules (end of file,
+   before or after the @media blocks is fine; it is self-contained
+   and carries its own responsive rules at the bottom).
+   ========================================================= */
+
+:root {
+  --parchment: #eadcc0;
+  --parchment-light: #f2e7cf;
+  --parchment-dark: #d3b98a;
+  --parchment-ink: #3a3228;
+  --card-line: #e3d6bb;
+  --string: #a98b60;
+}
+
+/* soft aged-paper wash behind the whole landing page */
+.landing-page {
+  background:
+    radial-gradient(60rem 30rem at 85% -5%, rgba(214, 190, 150, 0.28), transparent 70%),
+    radial-gradient(40rem 26rem at 5% 40%, rgba(214, 190, 150, 0.14), transparent 70%),
+    var(--paper);
+}
+
+/* ---------------------------------------------------------
+   HERO
+   --------------------------------------------------------- */
+
+.thread-hero {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 3rem);
+  align-items: start;
+  padding-top: 0.5rem;
+}
+
+.thread-hero-copy {
+  position: relative;
+  z-index: 3;
+  max-width: 34rem;
+  /* reserves room so the letter's overlap (below) never reaches the button */
+  padding-bottom: 7rem;
+}
+
+.thread-hero-copy h1 {
+  margin: 0.25rem 0 1.5rem;
+  font-size: clamp(2.75rem, 5.6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+.thread-opening p {
+  margin: 0 0 1rem;
+  max-width: 28rem;
+  color: #4a443b;
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.thread-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 0.75rem;
+  padding: 0.8125rem 1.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #f7f4ec;
+  font: 500 1rem/1 Georgia, "Times New Roman", serif;
+  box-shadow: 0 2px 6px rgba(40, 70, 65, 0.25);
+  transition: transform 140ms ease, background 140ms ease;
+}
+
+.thread-cta:hover {
+  background: #345f58;
+  transform: translateY(-1px);
+}
+
+/* ---------------------------------------------------------
+   ENVELOPE (pure CSS) + decorations
+   --------------------------------------------------------- */
+
+.thread-envelope-wrap {
+  position: relative;
+  z-index: 3;
+  min-height: 23rem;
+}
+
+.thread-sketch {
+  position: absolute;
+  top: -1.5rem;
+  left: 22%;
+  width: 13rem;
+  height: auto;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.thread-leaves {
+  position: absolute;
+  top: -2rem;
+  right: -1.5rem;
+  width: 11rem;
+  height: auto;
+  opacity: 0.85;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.thread-envelope {
+  position: absolute;
+  top: 5.25rem;
+  right: 3%;
+  width: min(86%, 25rem);
+  aspect-ratio: 1.55 / 1;
+  transform: rotate(9deg);
+  transform-origin: 60% 40%;
+  overflow: hidden;
+  border: 1px solid var(--envelope-line);
+  border-radius: 0.35rem;
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 238, 208, 0.35), transparent 60%),
+    linear-gradient(145deg, var(--envelope-paper-light), var(--envelope-paper));
+  box-shadow:
+    0 14px 28px var(--envelope-shadow),
+    0 2px 4px rgba(74, 49, 29, 0.18),
+    inset 0 0 0 1px rgba(255, 244, 224, 0.28),
+    inset 0 -12px 24px rgba(110, 70, 38, 0.15);
+}
+
+.envelope-flap,
+.envelope-fold {
+  position: absolute;
+  pointer-events: none;
+}
+
+.envelope-flap {
+  inset: 0 0 auto 0;
+  height: 56%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(180deg, rgba(120, 78, 44, 0.16), rgba(255, 238, 208, 0.12));
+  filter: drop-shadow(0 2px 2px rgba(74, 49, 29, 0.3));
+}
+
+.envelope-fold {
+  top: 0;
+  bottom: 0;
+  width: 55%;
+  background: rgba(120, 78, 44, 0.07);
+}
+
+.envelope-fold-left {
+  left: 0;
+  clip-path: polygon(0 0, 100% 62%, 0 100%);
+}
+
+.envelope-fold-right {
+  right: 0;
+  clip-path: polygon(100% 0, 0 62%, 100% 100%);
+}
+
+.envelope-writing {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+  color: var(--envelope-ink);
+  font: italic 500 clamp(0.95rem, 1.7vw, 1.2rem)/1.7 Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.envelope-flourish {
+  display: block;
+  width: 5rem;
+  height: 1px;
+  margin: 0.5rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--envelope-ink), transparent);
+  opacity: 0.7;
+}
+
+.envelope-thread {
+  position: absolute;
+  left: -2.5rem;
+  top: 6rem;
+  width: 15rem;
+  height: auto;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   LILAVATI'S LETTER (torn paper)
+   --------------------------------------------------------- */
+
+.letter-section {
+  position: relative;
+  z-index: 1;
+  margin-top: -5.5rem;
+  padding: 0 0 0.5rem;
+  filter: drop-shadow(0 12px 18px rgba(74, 49, 29, 0.22));
+}
+
+.letter-paper {
+  position: relative;
+  padding: clamp(3rem, 6vw, 4.75rem) clamp(1.75rem, 6vw, 4.5rem) clamp(2.5rem, 5vw, 4rem);
+  background:
+    radial-gradient(ellipse at 50% 45%, var(--parchment-light) 0%, var(--parchment) 62%, var(--parchment-dark) 100%);
+  color: var(--parchment-ink);
+  clip-path: polygon(
+    0 3%, 2% 1.6%, 5% 2.6%, 9% 1%, 14% 2.2%, 20% 0.8%, 27% 2%, 34% 1%, 41% 2.4%,
+    48% 1%, 55% 2%, 62% 0.8%, 69% 2.2%, 76% 1%, 83% 2.3%, 90% 1%, 96% 2.2%, 100% 1.2%,
+    99% 20%, 100% 40%, 98.8% 60%, 100% 80%, 99% 100%,
+    95% 98.4%, 88% 99.5%, 80% 98.2%, 72% 99.6%, 64% 98.3%, 56% 99.5%, 48% 98.2%,
+    40% 99.6%, 32% 98.4%, 24% 99.6%, 16% 98.3%, 8% 99.5%, 2% 98.5%, 0 100%,
+    1.2% 80%, 0 60%, 1% 40%, 0 20%
+  );
+}
+
+.letter-kicker {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.625rem;
+  display: inline-block;
+  border-bottom: 1px solid rgba(62, 111, 104, 0.4);
+  color: var(--accent);
+  font: 600 0.8125rem/1.6 system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.letter-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+}
+
+.letter-main {
+  padding-right: clamp(1.5rem, 4vw, 3rem);
+}
+
+.letter-clue {
+  padding-left: clamp(1.5rem, 4vw, 2.5rem);
+  border-left: 1px solid rgba(110, 85, 50, 0.45);
+}
+
+.letter-columns p {
+  margin: 0 0 0.875rem;
+  color: #3a3228;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+.letter-main p {
+  max-width: 34rem;
+}
+
+.letter-numbers {
+  margin: 0.25rem 0 1rem;
+  color: var(--accent);
+  font: 700 1.4rem/1.2 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+.letter-signature {
+  margin-top: 1.5rem !important;
+  color: #2a241c !important;
+  font: italic 400 1.5rem/1.2 "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive !important;
+}
+
+/* ---------------------------------------------------------
+   HOW THE JOURNEY WORKS
+   --------------------------------------------------------- */
+
+.journey-section {
+  padding: clamp(2.5rem, 5vw, 3.75rem) 0 2rem;
+}
+
+.journey-heading {
+  text-align: center;
+}
+
+.journey-rule-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.journey-rule {
+  height: 1px;
+  flex: 1;
+  background: #b9ae98;
+}
+
+.journey-kicker {
+  color: var(--accent);
+  font: 600 0.75rem/1.4 system-ui, sans-serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.journey-heading h2 {
+  margin: 1.25rem 0 2rem;
+  font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.journey-subheading {
+  display: block;
+  color: var(--accent);
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.journey-card {
+  padding: 1.5rem 1.25rem 1.5rem;
+  border: 1px solid var(--card-line);
+  border-radius: 0.5rem;
+  background: rgba(255, 252, 244, 0.55);
+}
+
+.journey-card-art {
+  height: 5.25rem;
+  margin: 0 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journey-icon {
+  width: auto;
+  height: 100%;
+  filter: drop-shadow(0 4px 4px rgba(74, 49, 29, 0.22));
+}
+
+.journey-card h3 {
+  margin: 0 0 0.625rem;
+  color: var(--accent);
+  font: 600 0.9375rem/1.3 Georgia, "Times New Roman", serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.journey-card p {
+  margin: 0 0 0.625rem;
+  color: #3e3a33;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.journey-divider {
+  width: 2.75rem;
+  height: 1px;
+  margin: 0.875rem 0;
+  background: #b9ae98;
+}
+
+/* ---------------------------------------------------------
+   CLOSING
+   --------------------------------------------------------- */
+
+.journey-closing {
+  max-width: 62rem;
+  margin: 1.75rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid #b9ae98;
+  text-align: center;
+}
+
+.journey-closing p {
+  margin: 0;
+  color: #4a443b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.journey-closing .closing-final {
+  margin-top: 0.75rem;
+  color: var(--accent);
+  font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+  line-height: 1.35;
+}
+
+/* ---------------------------------------------------------
+   COURSE ENTRY (module grid sits below the landing story)
+   --------------------------------------------------------- */
+
+.course-entry {
+  padding-top: clamp(3.5rem, 7vw, 5.5rem);
+  scroll-margin-top: 1.5rem;
+}
+
+.course-entry > h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: -0.02em;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE (landing v2)
+   --------------------------------------------------------- */
+
+@media (max-width: 64em) {
+  .journey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 56.25em) {
+  .thread-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .thread-envelope-wrap {
+    min-height: 19rem;
+  }
+
+  .thread-envelope {
+    top: 2.5rem;
+    right: 6%;
+    width: min(78%, 22rem);
+  }
+
+  .thread-sketch {
+    left: 8%;
+    width: 10rem;
+  }
+
+  .thread-hero-copy {
+    padding-bottom: 0;
+  }
+
+  .letter-section {
+    margin-top: -3rem;
+  }
+
+  .letter-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .letter-main {
+    padding-right: 0;
+  }
+
+  .letter-clue {
+    margin-top: 1rem;
+    padding: 1.25rem 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(110, 85, 50, 0.45);
+  }
+}
+
+@media (max-width: 37.5em) {
+  .thread-envelope-wrap {
+    min-height: 15.5rem;
+  }
+
+  .thread-envelope {
+    top: 1.5rem;
+    right: 4%;
+    width: 82%;
+  }
+
+  .thread-leaves {
+    width: 7rem;
+    right: -0.75rem;
+  }
+
+  .thread-sketch,
+  .envelope-thread {
+    display: none;
+  }
+
+  .letter-section {
+    margin-top: -1.5rem;
+  }
+
+  .journey-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-rule-row {
+    gap: 0.75rem;
+  }
+
+  .journey-kicker {
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thread-cta {
+    transition: none;
   }
 }

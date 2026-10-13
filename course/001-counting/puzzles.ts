@@ -200,50 +200,59 @@ hints: [
 },
 
   {
-    id: "balance-scale-detective",
-    title: "The Balance Scale Detective",
-    type: "reasoning",
-    prompt:
-      "A jeweller has been tricked! Among nine identical-looking coins, one is lighter than the rest. You have a balance scale and only two chances to weigh. Can you become the detective who finds the fake coin in two steps?",
-    instructions: [
-  "You have nine coins, a balance scale, and only two chances to use it.",
-  "The scale does not tell you how heavy a coin is. It only tells you which side is heavier, or whether the two sides balance.",
-  "Your challenge is to use each weighing to rule out as many possibilities as you can.",
-  "The Challenge: Can you guarantee that you will find the lighter coin in just two weighings?"
-],
-    hints: [
-      {
-        label: "Hint 1",
-        text: "Make three groups of 3."
-      },
-      {
-        label: "Hint 2",
-        text: "Weigh 3 coins against 3 coins. If they balance, where must the fake be?"
-      },
-      {
-        label: "Hint 3",
-        text: "You will have only 3 possible coins left. One more weighing is enough."
-      }
-    ],
-    answer: {
-      accepted: [
-        "three groups",
-        "3 groups of 3",
-        "weigh 3 against 3",
-        "then 1 against 1",
-        "third group then 1 vs 1",
-        "lighter group then 1 vs 1"
-      ],
-      mode: "contains",
-      placeholder: "Describe your two weighings"
+  id: "birthday-challenge",
+  title: "The Birthday Challenge",
+  type: "reasoning",
+
+  prompt:
+    "Can a few simple calculations reveal someone's birthday? Grab a calculator and follow the steps carefully. At the end, your final number will reveal your birth month and date. Can you figure out how the trick works?",
+
+  instructions: [
+    "Take your birth month number (January = 1, December = 12).",
+    "Multiply it by 5.",
+    "Add 6.",
+    "Multiply the result by 4.",
+    "Add 9.",
+    "Multiply the result by 5.",
+    "Add your birth date (for example, if you were born on the 14th, add 14).",
+    "Subtract 165."
+  ],
+
+  hints: [
+    {
+      label: "Hint 1",
+      text: "Try the trick with a birth month and date of your choice. Write down the number you get after each step."
     },
-    reveal:
-      "Split the coins into three groups of three. Weigh one group against another. If they balance, the fake is in the third group; otherwise it is in the lighter group. Then weigh two of those three coins against each other.",
-    image: {
-      src: "/course/001-counting/assets/mt_01_image10.png",
-      alt: "A balance scale puzzle with groups of coins"
+    {
+      label: "Hint 2",
+      text: "Pay attention to what happens to the birth month as you multiply. How large does its value become?"
+    },
+    {
+      label: "Hint 3",
+      text: "The final subtraction removes the extra amount added along the way. What remains is the month followed by the birth date."
     }
+  ],
+
+  answer: {
+    accepted: [
+      "month and date",
+      "birth month and date",
+      "100 times the month plus the date",
+      "100m + d",
+      "the month followed by the date"
+    ],
+    mode: "contains",
+    placeholder: "Explain how the birthday trick works"
   },
+
+  reveal:
+    "WHAT THIS SHOWS\n\nLet the birth month be m and the birth date be d. After the calculations, the number becomes 100m + 165 + d. Subtracting 165 leaves 100m + d. This places the month in the hundreds and higher places, followed by the birth date in the last two digits. CREATE YOUR OWN BIRTHDAY TRICK\n\nCan you invent a new number trick that reveals someone's birth month and date?\n\n1. Choose your own numbers and mathematical operations.\n2. Write down the steps for someone else to follow.\n3. Test your trick with different birth months and dates.\n4. Can you explain why it works every time?\n\nRemember: a trick that works for just one birthday is not enough. Can you make one that works for everyone?" ,
+
+  image: {
+    src: "/course/001-counting/assets/mt_01_image10.png",
+    alt: "A birthday number trick challenge"
+  }
+},
 
   {
     id: "merchants-weights",
