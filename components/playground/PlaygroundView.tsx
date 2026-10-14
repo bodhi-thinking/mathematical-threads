@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { PlaygroundConfig } from "../../lib/playground-types";
 import {
   MAX_BASE,
+  clampBase,
   MIN_BASE,
   MAX_QUANTITY,
   addQuantity,
@@ -13,17 +15,17 @@ import {
   powerOfBase,
 } from "../../lib/base-system";
 import { PlaceGrid } from "./PlaceGrid";
-
-export type PlaygroundConfig = {
-  id: string;
-  title: string;
-  description: string;
-};
+import styles from "./PlaygroundView.module.css";
 
 const DEFAULT_BASE = 10;
 
 export function PlaygroundView({ playground }: { playground: PlaygroundConfig }) {
-  const [base, setBase] = useState(DEFAULT_BASE);
+  // Only the place-value environment exists today; see lib/playground-types.ts.
+  return <PlaceValuePlayground playground={playground} />;
+}
+
+function PlaceValuePlayground({ playground }: { playground: PlaygroundConfig }) {
+  const [base, setBase] = useState(clampBase(playground.defaultBase ?? DEFAULT_BASE));
   const [quantity, setQuantity] = useState(0);
   const placeBoardRef = useRef<HTMLDivElement | null>(null);
 
@@ -71,13 +73,13 @@ export function PlaygroundView({ playground }: { playground: PlaygroundConfig })
   const clear = () => setQuantity(0);
 
   return (
-    <section className="card playground-card" aria-labelledby="place-value-playground-title">
+    <section className={`card ${styles["playground-card"]}`} aria-labelledby="place-value-playground-title">
       <div className="eyebrow">Playground</div>
       <h2 id="place-value-playground-title">{playground.title}</h2>
-      <p className="playground-description">{playground.description}</p>
+      <p className={styles["playground-description"]}>{playground.description}</p>
 
-      <div className="place-controls" aria-label="Place value controls">
-        <label className="base-control">
+      <div className={styles["place-controls"]} aria-label="Place value controls">
+        <label className={styles["base-control"]}>
           <span>Base</span>
           <input
             type="number"
@@ -90,28 +92,28 @@ export function PlaygroundView({ playground }: { playground: PlaygroundConfig })
           />
         </label>
 
-        <button className="clear-button" type="button" onClick={clear} disabled={quantity === 0}>
+        <button className={styles["clear-button"]} type="button" onClick={clear} disabled={quantity === 0}>
           Clear
         </button>
       </div>
 
-      <div ref={placeBoardRef} className="place-board" aria-label={`Base ${base} place value board`}>
-        <div className="place-columns">
+      <div ref={placeBoardRef} className={styles["place-board"]} aria-label={`Base ${base} place value board`}>
+        <div className={styles["place-columns"]}>
           {allPlaceValues.map((place) => (
-            <div className="place-column" key={place.index}>
-              <div className="place-heading">
-                <span className="place-name">{formatPower(place.value)}</span>
+            <div className={styles["place-column"]} key={place.index}>
+              <div className={styles["place-heading"]}>
+                <span className={styles["place-name"]}>{formatPower(place.value)}</span>
               </div>
 
               <PlaceGrid base={base} place={place} />
 
-              <div className="place-count" aria-live="polite">
+              <div className={styles["place-count"]} aria-live="polite">
                 {place.count}
               </div>
 
-              <div className="place-actions" aria-label={`Change ${formatPower(place.value)} place`}>
+              <div className={styles["place-actions"]} aria-label={`Change ${formatPower(place.value)} place`}>
                 <button
-                  className="place-action place-action-minus"
+                  className={styles["place-action"]}
                   type="button"
                   onClick={() => changeAtPlace(place.index, -1)}
                   disabled={quantity < place.value}
@@ -120,7 +122,7 @@ export function PlaygroundView({ playground }: { playground: PlaygroundConfig })
                   −
                 </button>
                 <button
-                  className="place-action place-action-plus"
+                  className={styles["place-action"]}
                   type="button"
                   onClick={() => changeAtPlace(place.index, 1)}
                   disabled={quantity + place.value > MAX_QUANTITY}
@@ -134,12 +136,12 @@ export function PlaygroundView({ playground }: { playground: PlaygroundConfig })
         </div>
       </div>
 
-      <div className="playground-number" aria-live="polite">
-        <span className="playground-number-label">Number</span>
+      <div className={styles["playground-number"]} aria-live="polite">
+        <span className={styles["playground-number-label"]}>Number</span>
         <strong>{formatQuantity(quantity)}</strong>
       </div>
 
-      <div className="playground-note">
+      <div className={styles["playground-note"]}>
         <span>Base {base}</span>
         <span>·</span>
         <span>When a place fills, it becomes one unit in the place to its left.</span>

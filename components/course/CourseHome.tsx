@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { lessons } from '../../course';
+import { getJourneyMetas } from '../../course';
+import styles from "./CourseHome.module.css";
 
 /* Decorative icons for the four "How the journey works" cards. */
 
@@ -9,7 +10,7 @@ function IconTablet() {
   return (
     <svg
       viewBox="0 0 120 80"
-      className="journey-icon"
+      className={styles["journey-icon"]}
       aria-hidden="true"
       focusable="false"
     >
@@ -81,7 +82,7 @@ function IconBlocks() {
   return (
     <svg
       viewBox="0 0 120 80"
-      className="journey-icon"
+      className={styles["journey-icon"]}
       aria-hidden="true"
       focusable="false"
     >
@@ -99,7 +100,7 @@ function IconWorksheet() {
   return (
     <svg
       viewBox="0 0 120 80"
-      className="journey-icon"
+      className={styles["journey-icon"]}
       aria-hidden="true"
       focusable="false"
     >
@@ -152,7 +153,7 @@ function IconStar() {
   return (
     <svg
       viewBox="0 0 120 80"
-      className="journey-icon"
+      className={styles["journey-icon"]}
       aria-hidden="true"
       focusable="false"
     >
@@ -192,30 +193,54 @@ const journeyCards = [
     title: 'History',
     Icon: IconTablet,
     top: [
-      'We begin by going back. You will meet the questions people were trying to solve long before mathematics looked like the subject you see in school.',
+      <>
+        We begin by going back.{' '}
+        <strong>
+          You will meet the questions people were trying to solve long before
+          mathematics looked like the subject you see in school.
+        </strong>
+      </>,
     ],
     bottom: [
-      'The stories help you see mathematics as something people figured out, not something that simply appeared in a textbook.',
+      <>
+        The stories help you see mathematics as something people{' '}
+        <em>figured out</em>, not something that simply appeared in a textbook.
+      </>,
     ],
   },
   {
     title: 'Playground',
     Icon: IconBlocks,
     top: [
-      'Then you get to experiment. Move things. Change numbers. Build patterns. Try something completely different.',
+      <>
+        Then you get to experiment.{' '}
+        <strong>Move things. Change numbers. Build patterns.</strong> Try
+        something completely different.
+      </>,
     ],
     bottom: [
-      'The Playground is where you can play with an idea and see what it does. Sometimes you will discover the rule before anyone tells you what the rule is.',
+      <>
+        The Playground is where you can play with an idea and see what it
+        does. Sometimes you will{' '}
+        <strong>discover the rule before anyone tells you what the rule is.</strong>
+      </>,
     ],
   },
   {
     title: 'Worksheets',
     Icon: IconWorksheet,
     top: [
-      'This is where the investigation gets serious. The worksheets give you problems to solve, patterns to notice and things to figure out.',
+      <>
+        This is where the investigation gets serious. The worksheets give you
+        problems to solve, patterns to notice and{' '}
+        <strong>things to figure out.</strong>
+      </>,
     ],
     bottom: [
-      "And hidden among them are Lilavati's clues. So keep your answers. You never know when one of them might become useful.",
+      <>
+        And <strong>hidden among them are Lilavati&rsquo;s clues.</strong> So
+        keep your answers. You never know when one of them might become useful.
+      </>,
     ],
   },
   {
@@ -225,23 +250,29 @@ const journeyCards = [
       'Finally, you meet some puzzles that have been around for a very long time.',
     ],
     bottom: [
-      'Some are quick. Some are tricky. Some might completely fool you the first time. They are not there just to check whether you understood the lesson.',
-      'They are there to make you think.',
+      <>
+        Some are quick. Some are tricky. Some might completely fool you the
+        first time. They are not there just to check whether you understood
+        the lesson.
+      </>,
+      <strong>They are there to make you think.</strong>,
     ],
   },
 ];
 
 export function CourseHome() {
+  const lessons = getJourneyMetas();
+
   return (
-    <main className="landing-page">
-      <div className="landing-shell">
+    <main className={styles["landing-page"]}>
+      <div className={styles["landing-shell"]}>
 
         <section
-          className="thread-hero"
+          className={styles["thread-hero"]}
           aria-labelledby="thread-title"
         >
-          <div className="thread-hero-copy">
-            <div className="landing-kicker">
+          <div className={styles["thread-hero-copy"]}>
+            <div className={styles["landing-kicker"]}>
               Mathematical Threads
             </div>
 
@@ -251,7 +282,7 @@ export function CourseHome() {
               Missing Thread
             </h1>
 
-            <div className="thread-opening">
+            <div className={styles["thread-opening"]}>
               <p>
                 Mathematics began with questions.
               </p>
@@ -267,7 +298,7 @@ export function CourseHome() {
             </div>
 
             <a
-              className="thread-cta"
+              className={styles["thread-cta"]}
               href="#course-entry"
             >
               Begin the Journey
@@ -275,9 +306,9 @@ export function CourseHome() {
             </a>
           </div>
 
-          <div className="thread-envelope-wrap">
+          <div className={styles["thread-envelope-wrap"]}>
             <svg
-              className="thread-sketch"
+              className={styles["thread-sketch"]}
               viewBox="0 0 220 220"
               aria-hidden="true"
               focusable="false"
@@ -297,7 +328,7 @@ export function CourseHome() {
             </svg>
 
             <svg
-              className="thread-leaves"
+              className={styles["thread-leaves"]}
               viewBox="0 0 200 200"
               aria-hidden="true"
               focusable="false"
@@ -322,35 +353,35 @@ export function CourseHome() {
             </svg>
 
             <div
-              className="thread-envelope"
+              className={styles["thread-envelope"]}
               aria-label="An envelope marked For the Person Who Finds the Thread"
             >
               <div
-                className="envelope-fold envelope-fold-left"
+                className={`${styles["envelope-fold"]} ${styles["envelope-fold-left"]}`}
                 aria-hidden="true"
               />
               <div
-                className="envelope-fold envelope-fold-right"
+                className={`${styles["envelope-fold"]} ${styles["envelope-fold-right"]}`}
                 aria-hidden="true"
               />
               <div
-                className="envelope-flap"
+                className={styles["envelope-flap"]}
                 aria-hidden="true"
               />
 
-              <div className="envelope-writing">
+              <div className={styles["envelope-writing"]}>
                 For the Person
                 <br />
                 Who Finds the Thread
                 <span
-                  className="envelope-flourish"
+                  className={styles["envelope-flourish"]}
                   aria-hidden="true"
                 />
               </div>
             </div>
 
             <svg
-              className="envelope-thread"
+              className={styles["envelope-thread"]}
               viewBox="0 0 260 200"
               aria-hidden="true"
               focusable="false"
@@ -367,13 +398,13 @@ export function CourseHome() {
         </section>
 
         <section
-          className="letter-section"
+          className={styles["letter-section"]}
           aria-labelledby="letter-title"
         >
-          <div className="letter-paper">
-            <div className="letter-heading">
+          <div className={styles["letter-paper"]}>
+            <div>
               <div
-                className="letter-kicker"
+                className={styles["letter-kicker"]}
                 id="letter-title"
               >
                 An unfinished investigation
@@ -382,12 +413,11 @@ export function CourseHome() {
               </div>
             </div>
 
-            <div className="letter-columns">
-              <div className="letter-main">
+            <div className={styles["letter-columns"]}>
+              <div className={styles["letter-main"]}>
                 <p>
-                  If you have found this envelope, then you are
-                  about to begin a journey that took me many years
-                  to complete.
+                  If you have found this envelope, then you are about to begin{' '}
+                  <span className={styles['letter-mark']}>a journey that took me many years to complete</span>.
                 </p>
 
                 <p>
@@ -423,31 +453,30 @@ export function CourseHome() {
                 </p>
               </div>
 
-              <div className="letter-clue">
+              <div className={styles["letter-clue"]}>
                 <p>
                   The first clue is hidden in the most ordinary
                   place imaginable.
                 </p>
 
-                <div className="letter-numbers">
+                <div className={styles["letter-numbers"]}>
                   Numbers.
                 </div>
 
                 <p>
-                  I have left you eight small problems. You may
-                  find them in the worksheets as you travel through
-                  the modules.
+                  I have left you{' '}
+                  <span className={styles['letter-mark']}>with a set of problems.
+                  You may find them in the <strong>worksheets</strong> as you travel through the modules.</span>
                 </p>
 
                 <p>
-                  They are not there to test whether you are good
-                  at mathematics. They are there because each
-                  answer contains part of the next clue.
+                  They are not there to test whether you are good at mathematics.
+                  They are there because{' '}
+                  <span className={styles['letter-mark']}>each answer contains part of the next clue</span>.
                 </p>
 
-                <p>Solve them carefully.</p>
-
-                <p>Do not throw away your answers.</p>
+                <p className={`${styles['letter-beat']} ${styles['letter-instruction']}`}>Solve them carefully.</p>
+                <p className={`${styles['letter-beat']} ${styles['letter-instruction']}`}>Do not throw away your answers.</p>
 
                 <p>
                   And when you have all the clues, you will know
@@ -456,7 +485,7 @@ export function CourseHome() {
 
                 <p>Why? That is for you to discover.</p>
 
-                <p className="letter-signature">
+                <p className={styles["letter-signature"]}>
                   Lilavati
                 </p>
               </div>
@@ -465,40 +494,40 @@ export function CourseHome() {
         </section>
 
         <section
-          className="journey-section"
+          className={styles["journey-section"]}
           aria-labelledby="journey-title"
         >
-          <div className="journey-heading">
-            <div className="journey-rule-row">
+          <div className={styles["journey-heading"]}>
+            <div className={styles["journey-rule-row"]}>
               <span
-                className="journey-rule"
+                className={styles["journey-rule"]}
                 aria-hidden="true"
               />
-              <div className="journey-kicker">
+              <div className={styles["journey-kicker"]}>
                 How the journey works
               </div>
               <span
-                className="journey-rule"
+                className={styles["journey-rule"]}
                 aria-hidden="true"
               />
             </div>
 
             <h2 id="journey-title">
               You are not simply taking a mathematics course.
-              <span className="journey-subheading">
+              <span className={styles["journey-subheading"]}>
                 You are following a trail.
               </span>
             </h2>
           </div>
 
-          <div className="journey-grid">
+          <div className={styles["journey-grid"]}>
             {journeyCards.map(
               ({ title, Icon, top, bottom }) => (
                 <article
-                  className="journey-card"
+                  className={styles["journey-card"]}
                   key={title}
                 >
-                  <div className="journey-card-art">
+                  <div className={styles["journey-card-art"]}>
                     <Icon />
                   </div>
 
@@ -509,7 +538,7 @@ export function CourseHome() {
                   ))}
 
                   <div
-                    className="journey-divider"
+                    className={styles["journey-divider"]}
                     aria-hidden="true"
                   />
 
@@ -523,7 +552,7 @@ export function CourseHome() {
         </section>
 
         <section
-          className="journey-closing"
+          className={styles["journey-closing"]}
           aria-label="The trail continues"
         >
           <p>
@@ -533,7 +562,7 @@ export function CourseHome() {
             Another piece of history. Another puzzle. Another clue.
           </p>
 
-          <p className="closing-final">
+          <p className={styles["closing-final"]}>
             You may begin with numbers. But where the trail leads...
             <br />
             you will have to find out.
@@ -541,11 +570,11 @@ export function CourseHome() {
         </section>
 
         <section
-          className="course-entry"
+          className={styles["course-entry"]}
           id="course-entry"
           aria-labelledby="course-entry-title"
         >
-          <div className="landing-kicker">
+          <div className={styles["landing-kicker"]}>
             Mathematical Threads
           </div>
 
@@ -554,57 +583,65 @@ export function CourseHome() {
           </h2>
 
           <div
-            className="lesson-grid"
+            className={styles["lesson-grid"]}
             aria-label="Mathematical Threads modules"
           >
-            {lessons.map((lesson, index) => {
-              const isPlaceholder =
-                lesson.subtitle
-                  ?.toLowerCase()
-                  .includes('placeholder');
+            {lessons.length === 0 && (
+              <p className={styles['lesson-description']}>
+                The first journey is on its way.
+              </p>
+            )}
 
-              const subtitle = isPlaceholder
-                ? 'A journey from sheep and pebbles to place value and zero.'
-                : lesson.subtitle;
+            {lessons.map((lesson, index) => {
+              const comingSoon = lesson.status === 'coming-soon';
 
               return (
                 <article
-                  className="lesson-card"
+                  className={styles['lesson-card']}
                   key={lesson.id}
                 >
-                  <div className="lesson-card-top">
-                    <div className="lesson-number">
+                  <div className={styles['lesson-card-top']}>
+                    <div className={styles['lesson-number']}>
                       Series {String(index + 1).padStart(2, '0')}
                     </div>
 
                     <div
-                      className="lesson-mark"
+                      className={styles['lesson-mark']}
                       aria-hidden="true"
                     >
                       {index + 1}
                     </div>
                   </div>
 
-                  <div className="lesson-card-content">
+                  <div className={styles['lesson-card-content']}>
                     <h2>{lesson.title}</h2>
 
-                    {subtitle && (
-                      <p className="lesson-description">
-                        {subtitle}
+                    {lesson.subtitle && (
+                      <p className={styles['lesson-description']}>
+                        {lesson.subtitle}
                       </p>
                     )}
                   </div>
 
-                  <div className="lesson-card-footer">
-                    <Link
-                      className="lesson-button"
-                      href={`/lesson/${lesson.id}`}
-                    >
-                      Begin the thread
-                      <span aria-hidden="true">
-                        →
+                  <div className={styles['lesson-card-footer']}>
+                    {comingSoon ? (
+                      <span
+                        className={`${styles['lesson-button']} ${styles['lesson-button-soon']}`}
+                        aria-disabled="true"
+                      >
+                        Coming soon
                       </span>
-                    </Link>
+                    ) : (
+                      <Link
+                        className={styles['lesson-button']}
+                        href={`/lesson/${lesson.id}`}
+                      >
+                        Begin the thread
+                        <span aria-hidden="true">
+                          →
+                        </span>
+                      </Link>
+                    )}
                   </div>
                 </article>
               );

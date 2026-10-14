@@ -1,4 +1,5 @@
 import type { PlaceValue } from "../../lib/base-system";
+import styles from "./PlaygroundView.module.css";
 
 type PlaceGridProps = {
   base: number;
@@ -23,9 +24,9 @@ export function PlaceGrid({ base, place }: PlaceGridProps) {
   const cells = Array.from({ length: capacityCells }, (_, index) => index);
 
   return (
-    <div className="place-grid-wrap">
+    <div className={styles["place-grid-wrap"]}>
       <div
-        className="place-grid"
+        className={styles["place-grid"]}
         style={{
           gridTemplateColumns: `repeat(${columns}, var(--place-cell-size))`,
           gridTemplateRows: `repeat(${rows}, var(--place-cell-size))`,
@@ -38,11 +39,15 @@ export function PlaceGrid({ base, place }: PlaceGridProps) {
 
           return (
             <div
-              className={`place-cell${active ? "" : " place-cell-inactive"}`}
+              className={
+                active
+                  ? styles["place-cell"]
+                  : `${styles["place-cell"]} ${styles["place-cell-inactive"]}`
+              }
               key={cell}
             >
               {active && filled ? (
-                <span className={`place-unit ${placeColorClass}`} aria-hidden="true" />
+                <span className={`${styles["place-unit"]} ${styles[placeColorClass]}`} aria-hidden="true" />
               ) : null}
             </div>
           );

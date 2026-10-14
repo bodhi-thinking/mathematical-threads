@@ -1,4 +1,4 @@
-import type { Puzzle } from "../../lib/puzzle-types";
+import type { Puzzle, PuzzleSetConfig } from "../../lib/puzzle-types";
 
 export const puzzles: Puzzle[] = [
   {
@@ -416,3 +416,12 @@ hints: [
     }
   }
 ];
+
+export const puzzleSet: PuzzleSetConfig = {
+  heading: "Now try it yourself.",
+  intro: [
+    "We are going to travel through time, crack secret codes, outsmart ancient kings, and even pilot an alien spacecraft.",
+    "Math isn't just a list of rules—it's the greatest story ever told by humanity. Let's see if you can solve the very same mysteries that stumped the greatest minds in history. Grab your pencil, and let's jump in!",
+  ],
+  puzzles,
+};

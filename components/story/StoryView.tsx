@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
@@ -12,6 +13,7 @@ import type {
   Story,
   StoryBlock,
 } from "../../lib/story-types";
+import styles from "./StoryView.module.css";
 
 type StoryViewProps = {
   story: Story;
@@ -60,7 +62,7 @@ function StoryImage({
   if (hasError) {
     return (
       <div
-        className="story-image-fallback"
+        className={styles["story-image-fallback"]}
         role="img"
         aria-label={alt}
       >
@@ -72,6 +74,7 @@ function StoryImage({
   }
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element -- plain <img> so onError can swap in the fallback
     <img
       src={src}
       alt={alt}
@@ -96,7 +99,7 @@ function StoryBeatContent({
           case "image":
             return (
               <figure
-                className="story-beat-image"
+                className={styles["story-beat-image"]}
                 key={`image-${index}`}
               >
                 <StoryImage
@@ -109,7 +112,7 @@ function StoryBeatContent({
           case "highlight":
             return (
               <div
-                className="story-beat-highlight"
+                className={styles["story-beat-highlight"]}
                 key={`highlight-${index}`}
               >
                 {block.text}
@@ -119,7 +122,7 @@ function StoryBeatContent({
           case "question":
             return (
               <div
-                className="story-beat-question"
+                className={styles["story-beat-question"]}
                 key={`question-${index}`}
               >
                 {block.text}
@@ -129,7 +132,7 @@ function StoryBeatContent({
           case "list":
             return (
               <ol
-                className="story-beat-list"
+                className={styles["story-beat-list"]}
                 key={`list-${index}`}
               >
                 {block.items.map(
@@ -147,7 +150,7 @@ function StoryBeatContent({
           case "text":
             return (
               <p
-                className="story-beat-text"
+                className={styles["story-beat-text"]}
                 key={`text-${index}`}
               >
                 {block.text}
@@ -165,11 +168,10 @@ function StoryBeatContent({
 export function StoryView({
   story,
 }: StoryViewProps) {
-  const beats = Array.isArray(
-    story?.beats
-  )
-    ? story.beats
-    : [];
+  const beats = useMemo(
+    () => (Array.isArray(story?.beats) ? story.beats : []),
+    [story]
+  );
 
   const total = beats.length;
 
@@ -215,6 +217,9 @@ export function StoryView({
         target?.isContentEditable;
 
       if (isFormElement) return;
+
+      // Leave browser shortcuts alone (e.g. Alt+← is "Back").
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
 
       if (
         event.key === "ArrowRight"
@@ -355,7 +360,7 @@ export function StoryView({
   if (total === 0) {
     return (
       <section
-        className="story-error"
+        className={styles["story-error"]}
         role="status"
       >
         <div className="eyebrow">
@@ -383,7 +388,7 @@ export function StoryView({
   if (!activeBeat) {
     return (
       <section
-        className="story-error"
+        className={styles["story-error"]}
         role="status"
       >
         <div className="eyebrow">
@@ -410,19 +415,19 @@ export function StoryView({
 
   return (
     <article
-      className="story-experience"
+      className={styles["story-experience"]}
       aria-label={story.title}
     >
-      <header className="story-experience-header">
+      <header className={styles["story-experience-header"]}>
         <div className="eyebrow">
           Mathematical Threads
         </div>
 
-        <div className="story-title-group">
+        <div className={styles["story-title-group"]}>
           <h1>{story.title}</h1>
 
           {story.subtitle ? (
-            <p className="story-subtitle">
+            <p className={styles["story-subtitle"]}>
               {story.subtitle}
             </p>
           ) : null}
@@ -431,14 +436,14 @@ export function StoryView({
       </header>
 
       <div
-        className="story-stage"
+        className={styles["story-stage"]}
         key={activeBeat.id}
         aria-live="polite"
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerCancel}
       >
-        <div className="story-beat">
+        <div className={styles["story-beat"]}>
           <StoryBeatContent
             blocks={
               activeBeat.blocks
@@ -448,13 +453,13 @@ export function StoryView({
       </div>
 
       <nav
-        className="story-navigation"
+        className={styles["story-navigation"]}
         aria-label="Story navigation"
       >
-        <div className="story-navigation-row">
+        <div className={styles["story-navigation-row"]}>
           <button
             type="button"
-            className="story-nav-arrow"
+            className={styles["story-nav-arrow"]}
             onClick={goPrevious}
             disabled={isFirst}
             aria-label="Previous story section"
@@ -463,7 +468,7 @@ export function StoryView({
           </button>
 
           <span
-            className="story-counter"
+            className={styles["story-counter"]}
             aria-live="polite"
           >
             {activeIndex + 1} / {total}
@@ -471,7 +476,7 @@ export function StoryView({
 
           <button
             type="button"
-            className="story-nav-arrow"
+            className={styles["story-nav-arrow"]}
             onClick={goNext}
             disabled={isLast}
             aria-label="Next story section"
@@ -480,7 +485,7 @@ export function StoryView({
           </button>
         </div>
 
-        <div className="story-dots-navigation">
+        <div className={styles["story-dots-navigation"]}>
           {beats.map(
             (beat, index) => (
               <button
@@ -488,8 +493,8 @@ export function StoryView({
                 type="button"
                 className={
                   index === activeIndex
-                    ? "story-dot story-dot-active"
-                    : "story-dot"
+                    ? `${styles["story-dot"]} ${styles["story-dot-active"]}`
+                    : styles["story-dot"]
                 }
                 aria-label={`Go to story section ${
                   index + 1
@@ -510,7 +515,7 @@ export function StoryView({
         </div>
       </nav>
 
-      <div className="story-swipe-hint">
+      <div className={styles["story-swipe-hint"]}>
         {isLast
           ? "End of story"
           : "Swipe or use the arrows to continue"}

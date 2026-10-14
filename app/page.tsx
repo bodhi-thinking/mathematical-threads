@@ -1,1 +1,5 @@
-import{CourseHome}from'../components/course/CourseHome';export default function Home(){return <CourseHome/>}
+import { CourseHome } from "../components/course/CourseHome";
+
+export default function Home() {
+  return <CourseHome />;
+}

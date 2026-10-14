@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { Puzzle } from "../../lib/puzzle-types";
+import type { Puzzle, PuzzleSetConfig } from "../../lib/puzzle-types";
+import styles from "./PuzzleSet.module.css";
 
 const normalizeAnswer = (value: string) =>
   value
@@ -27,35 +28,35 @@ function isAnswerCorrect(puzzle: Puzzle, value: string) {
   });
 }
 
-export function PuzzleSet({ puzzles }: { puzzles: Puzzle[] }) {
+export function PuzzleSet({ puzzleSet }: { puzzleSet: PuzzleSetConfig }) {
   const [score, setScore] = useState(0);
+  const puzzles = Array.isArray(puzzleSet?.puzzles) ? puzzleSet.puzzles : [];
+  const intro = Array.isArray(puzzleSet?.intro) ? puzzleSet.intro : [];
+
+  // A journey with no puzzles yet simply shows no puzzle section.
+  if (puzzles.length === 0) return null;
 
   return (
-    <section className="puzzle-set">
+    <section className={styles["puzzle-set"]}>
       <div className="eyebrow">Puzzles</div>
-      <h2>Now try it yourself.</h2>
+      <h2>{puzzleSet.heading}</h2>
 
-      <div className="puzzle-intro">
-        <p>
-          We are going to travel through time, crack secret codes, outsmart
-          ancient kings, and even pilot an alien spacecraft.
-        </p>
-        <p>
-          Math isn't just a list of rules—it's the greatest story ever told by
-          humanity. Let's see if you can solve the very same mysteries that
-          stumped the greatest minds in history. Grab your pencil, and let's
-          jump in!
-        </p>
-      </div>
+      {intro.length > 0 && (
+        <div className={styles["puzzle-intro"]}>
+          {intro.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </div>
+      )}
 
-      <div className="puzzle-progress" aria-live="polite">
+      <div className={styles["puzzle-progress"]} aria-live="polite">
         <span>Your progress</span>
         <strong>
           {score} / {puzzles.length}
         </strong>
       </div>
 
-      <div className="puzzle-list">
+      <div className={styles["puzzle-list"]}>
         {puzzles.map((puzzle, index) => (
           <PuzzleCard
             key={puzzle.id}
@@ -105,29 +106,29 @@ function PuzzleCard({
   };
 
   return (
-    <article className="card puzzle">
-      <div className="puzzle-number">
+    <article className={`card ${styles["puzzle"]}`}>
+      <div className={styles["puzzle-number"]}>
         PUZZLE {number} · {puzzle.type.toUpperCase()}
       </div>
 
-      <div className="puzzle-layout">
-        <div className="puzzle-content">
+      <div className={styles["puzzle-layout"]}>
+        <div className={styles["puzzle-content"]}>
           <h2>{puzzle.title}</h2>
 
-          <p className="puzzle-prompt">{puzzle.prompt}</p>
+          <p className={styles["puzzle-prompt"]}>{puzzle.prompt}</p>
 
           {puzzle.instructions && (
-            <ol className="puzzle-instructions">
-              {puzzle.instructions.map((instruction) => (
-                <li key={instruction}>{instruction}</li>
+            <ol className={styles["puzzle-instructions"]}>
+              {puzzle.instructions.map((instruction, instructionIndex) => (
+                <li key={`${instructionIndex}-${instruction}`}>{instruction}</li>
               ))}
             </ol>
           )}
 
           {puzzle.answer && (
-            <div className="puzzle-challenge">
+            <div className={styles["puzzle-challenge"]}>
               <label htmlFor={`answer-${puzzle.id}`}>Your answer</label>
-              <div className="puzzle-submit-row">
+              <div className={styles["puzzle-submit-row"]}>
                 <input
                   id={`answer-${puzzle.id}`}
                   type="text"
@@ -145,7 +146,7 @@ function PuzzleCard({
                 />
                 <button
                   type="button"
-                  className="puzzle-button puzzle-submit-button"
+                  className={`${styles["puzzle-button"]} ${styles["puzzle-submit-button"]}`}
                   onClick={submitAnswer}
                   disabled={!answer.trim() || correct}
                 >
@@ -155,8 +156,12 @@ function PuzzleCard({
 
               <div
                 id={`feedback-${puzzle.id}`}
-                className={`puzzle-feedback ${
-                  submitted ? (correct ? "is-correct" : "is-try-again") : ""
+                className={`${styles["puzzle-feedback"]} ${
+                  submitted
+                    ? correct
+                      ? styles["is-correct"]
+                      : styles["is-try-again"]
+                    : ""
                 }`}
                 aria-live="polite"
               >
@@ -168,10 +173,10 @@ function PuzzleCard({
           )}
 
           {puzzle.hints && puzzle.hints.length > 0 && (
-            <div className="puzzle-actions">
+            <div className={styles["puzzle-actions"]}>
               <button
                 type="button"
-                className="puzzle-button"
+                className={styles["puzzle-button"]}
                 onClick={showNextHint}
                 disabled={hintIndex >= puzzle.hints.length - 1}
               >
@@ -183,9 +188,9 @@ function PuzzleCard({
               </button>
 
               {hintIndex >= 0 && (
-                <div className="puzzle-hints">
-                  {puzzle.hints.slice(0, hintIndex + 1).map((hint) => (
-                    <div className="puzzle-hint" key={hint.label}>
+                <div className={styles["puzzle-hints"]}>
+                  {puzzle.hints.slice(0, hintIndex + 1).map((hint, hintPosition) => (
+                    <div className={styles["puzzle-hint"]} key={`${hintPosition}-${hint.label}`}>
                       <span>{hint.label}</span>
                       <p>{hint.text}</p>
                     </div>
@@ -196,17 +201,17 @@ function PuzzleCard({
           )}
 
           {puzzle.reveal && (
-            <div className="puzzle-answer">
+            <div className={styles["puzzle-answer"]}>
               <button
                 type="button"
-                className="puzzle-button puzzle-button-secondary"
+                className={`${styles["puzzle-button"]} ${styles["puzzle-button-secondary"]}`}
                 onClick={() => setShowReveal((visible) => !visible)}
               >
                 {showReveal ? "Hide the idea" : "Show the idea"}
               </button>
 
               {showReveal && (
-                <div className="puzzle-reveal">
+                <div className={styles["puzzle-reveal"]}>
                   <span>What this shows</span>
                   <p>{puzzle.reveal}</p>
                 </div>
@@ -216,7 +221,8 @@ function PuzzleCard({
         </div>
 
         {puzzle.image && (
-          <figure className="puzzle-image">
+          <figure className={styles["puzzle-image"]}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- plain <img>: public/ assets with no fixed dimensions */}
             <img src={puzzle.image.src} alt={puzzle.image.alt} />
           </figure>
         )}

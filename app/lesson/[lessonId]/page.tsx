@@ -1,2 +1,37 @@
-import Link from 'next/link';import{notFound}from'next/navigation';import{story}from'../../../course/001-counting/story';import{playground}from'../../../course/001-counting/playground';import{puzzles}from'../../../course/001-counting/puzzles';import{ProgressBar}from'../../../components/course/ProgressBar';import{StoryView}from'../../../components/course/StoryView';import{PlaygroundView}from'../../../components/playground/PlaygroundView';import{PuzzleSet}from'../../../components/puzzles/PuzzleSet';
-export default async function LessonPage({params}:{params:Promise<{lessonId:string}>}){const{lessonId}=await params;if(lessonId!=='001-counting')notFound();return <main className="shell"><div className="lesson-topbar"><Link className="course-home-link" href="/course">← Course home</Link></div><ProgressBar/><div className="divider"/><StoryView story={story}/><div className="divider"/><PlaygroundView playground={playground}/><div className="divider"/><PuzzleSet puzzles={puzzles}/></main>}
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { LessonLayout } from "../../../components/course/LessonLayout";
+import { getJourney, journeys } from "../../../course";
+import { assertJourneysValid } from "../../../course/validate";
+
+type LessonPageProps = { params: Promise<{ lessonId: string }> };
+
+// Only journeys in the registry exist; any other id is a 404.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  // Fails `next build` with a readable list if any journey's content is malformed.
+  assertJourneysValid();
+
+  return journeys
+    .filter((journey) => journey.meta.status !== "coming-soon")
+    .map((journey) => ({ lessonId: journey.meta.id }));
+}
+
+export async function generateMetadata({ params }: LessonPageProps): Promise<Metadata> {
+  const { lessonId } = await params;
+  const journey = getJourney(lessonId);
+
+  return journey
+    ? { title: `${journey.meta.title} · Mathematical Threads` }
+    : { title: "Mathematical Threads" };
+}
+
+export default async function LessonPage({ params }: LessonPageProps) {
+  const { lessonId } = await params;
+  const journey = getJourney(lessonId);
+
+  if (!journey || journey.meta.status === "coming-soon") notFound();
+
+  return <LessonLayout journey={journey} />;
+}

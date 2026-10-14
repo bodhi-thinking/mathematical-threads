@@ -1,1 +1,6 @@
-import{CourseHome}from'../../components/course/CourseHome';export default function CoursePage(){return <CourseHome/>}
+import { redirect } from "next/navigation";
+
+// The course home now lives at "/". This keeps old /course links and bookmarks working.
+export default function CoursePage() {
+  redirect("/");
+}

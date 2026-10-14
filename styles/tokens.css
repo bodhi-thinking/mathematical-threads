@@ -1,0 +1,31 @@
+/* =========================================================
+   DESIGN TOKENS
+   Shared colours. Component CSS Modules read these via var(--name).
+   Typography and spacing stay with the components that own them;
+   add a token here only when two or more components share a value.
+   ========================================================= */
+
+:root {
+  /* Core palette */
+  --paper: #f7f4ec;
+  --ink: #26231f;
+  --muted: #6f6a61;
+  --line: #ded8ca;
+  --accent: #3e6f68;
+  --card: #fffdf8;
+
+  /* Landing / investigation */
+  --envelope-paper: #c39a72;
+  --envelope-paper-light: #d4b08a;
+  --envelope-ink: #765033;
+  --envelope-line: #916744;
+  --envelope-shadow: rgba(74, 49, 29, 0.14);
+
+  /* Parchment (landing v2, clue card, worksheet) */
+  --parchment: #eadcc0;
+  --parchment-light: #f2e7cf;
+  --parchment-dark: #d3b98a;
+  --parchment-ink: #3a3228;
+  --card-line: #e3d6bb;
+  --string: #a98b60;
+}

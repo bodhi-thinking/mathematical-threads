@@ -1,0 +1,43 @@
+/* Lesson page chrome
+   Split from the original app/globals.css. Rule order within this file matches the original. */
+
+.lesson-topbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.course-home-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.125rem;
+  padding: 0.4375rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  font: 600 0.75rem/1.2 system-ui, sans-serif;
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms ease;
+}
+
+.course-home-link:hover {
+  color: var(--ink);
+  border-color: #c9c1b1;
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .course-home-link {
+    transition: none;
+  }
+}
+
+/* Replaces the inline style the old ProgressBar carried. */
+.lesson-outline {
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+}

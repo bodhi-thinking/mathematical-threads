@@ -32,3 +32,15 @@ export type Puzzle = {
   answer?: PuzzleAnswer;
   image?: PuzzleImage;
 };
+
+
+/**
+ * What a journey supplies to <PuzzleSet />. The heading and intro are
+ * journey-specific copy, so they live with the journey rather than in the
+ * component.
+ */
+export type PuzzleSetConfig = {
+  heading: string;
+  intro: string[];
+  puzzles: Puzzle[];
+};
