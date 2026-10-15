@@ -1,5 +1,7 @@
-import Link from 'next/link';
-import { getJourneyMetas } from '../../course';
+import type { ComponentType, ReactNode } from "react";
+import Link from "next/link";
+
+import { getJourneyMetas } from "../../course";
 import styles from "./CourseHome.module.css";
 
 /* Decorative icons for the four "How the journey works" cards. */
@@ -188,13 +190,22 @@ function IconStar() {
   );
 }
 
-const journeyCards = [
+type JourneyCard = {
+  id: "history" | "playground" | "worksheets" | "classic-puzzles";
+  title: string;
+  Icon: ComponentType;
+  top: ReactNode[];
+  bottom: ReactNode[];
+};
+
+const journeyCards: JourneyCard[] = [
   {
-    title: 'History',
+    id: "history",
+    title: "History",
     Icon: IconTablet,
     top: [
       <>
-        We begin by going back.{' '}
+        We begin by going back.{" "}
         <strong>
           You will meet the questions people were trying to solve long before
           mathematics looked like the subject you see in school.
@@ -203,17 +214,18 @@ const journeyCards = [
     ],
     bottom: [
       <>
-        The stories help you see mathematics as something people{' '}
+        The stories help you see mathematics as something people{" "}
         <em>figured out</em>, not something that simply appeared in a textbook.
       </>,
     ],
   },
   {
-    title: 'Playground',
+    id: "playground",
+    title: "Playground",
     Icon: IconBlocks,
     top: [
       <>
-        Then you get to experiment.{' '}
+        Then you get to experiment.{" "}
         <strong>Move things. Change numbers. Build patterns.</strong> Try
         something completely different.
       </>,
@@ -221,33 +233,37 @@ const journeyCards = [
     bottom: [
       <>
         The Playground is where you can play with an idea and see what it
-        does. Sometimes you will{' '}
-        <strong>discover the rule before anyone tells you what the rule is.</strong>
+        does. Sometimes you will{" "}
+        <strong>
+          discover the rule before anyone tells you what the rule is.
+        </strong>
       </>,
     ],
   },
   {
-    title: 'Worksheets',
+    id: "worksheets",
+    title: "Worksheets",
     Icon: IconWorksheet,
     top: [
       <>
         This is where the investigation gets serious. The worksheets give you
-        problems to solve, patterns to notice and{' '}
+        problems to solve, patterns to notice and{" "}
         <strong>things to figure out.</strong>
       </>,
     ],
     bottom: [
       <>
-        And <strong>hidden among them are Lilavati&rsquo;s clues.</strong> So
-        keep your answers. You never know when one of them might become useful.
+        And <strong>hidden among them are Lilavati’s clues.</strong> So keep
+        your answers. You never know when one of them might become useful.
       </>,
     ],
   },
   {
-    title: 'Classic Puzzles',
+    id: "classic-puzzles",
+    title: "Classic Puzzles",
     Icon: IconStar,
     top: [
-      'Finally, you meet some puzzles that have been around for a very long time.',
+      "Finally, you meet some puzzles that have been around for a very long time.",
     ],
     bottom: [
       <>
@@ -520,35 +536,33 @@ export function CourseHome() {
             </h2>
           </div>
 
-          <div className={styles["journey-grid"]}>
-            {journeyCards.map(
-              ({ title, Icon, top, bottom }) => (
-                <article
-                  className={styles["journey-card"]}
-                  key={title}
-                >
-                  <div className={styles["journey-card-art"]}>
-                    <Icon />
-                  </div>
+         <div className={styles["journey-grid"]}>
+  {journeyCards.map(({ id, title, Icon, top, bottom }) => (
+    <article
+      className={styles["journey-card"]}
+      key={id}
+    >
+      <div className={styles["journey-card-art"]}>
+        <Icon />
+      </div>
 
-                  <h3>{title}</h3>
+      <h3>{title}</h3>
 
-                  {top.map((text) => (
-                    <p key={text}>{text}</p>
-                  ))}
+      {top.map((content, index) => (
+        <p key={`${id}-top-${index}`}>{content}</p>
+      ))}
 
-                  <div
-                    className={styles["journey-divider"]}
-                    aria-hidden="true"
-                  />
+      <div
+        className={styles["journey-divider"]}
+        aria-hidden="true"
+      />
 
-                  {bottom.map((text) => (
-                    <p key={text}>{text}</p>
-                  ))}
-                </article>
-              ),
-            )}
-          </div>
+      {bottom.map((content, index) => (
+        <p key={`${id}-bottom-${index}`}>{content}</p>
+      ))}
+    </article>
+  ))}
+</div>
         </section>
 
         <section
